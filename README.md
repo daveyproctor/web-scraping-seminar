@@ -5,4 +5,7 @@
 ## usage:
 `$ git clone https://github.com/daveyproctor/web-scraping-seminar`
 
-## Follow along from there!
+## What we did:
+`$ unzip web-scraping-seminar`
+* fill in the TODOs!
+* working code is already finished up above.

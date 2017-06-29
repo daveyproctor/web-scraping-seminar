@@ -4,29 +4,23 @@ import re
 from links import links
 links = links[-5:]
 
-# print(links)
-
 
 """ping url and return soup object"""
 def get_soup(url):
 	data = requests.get(url).text
 	return BeautifulSoup(data, "html.parser")
 
-soup = get_soup(links[0])
 
 """return all relevant text as continuous string"""
 def text(soup):
 	all_paras = soup.find_all('p')
 	return ' '.join([para.get_text() for para in all_paras])
 
-raw = text(soup)
-
 
 """convert all strings to lower and remove irrelevant chars like .;'"""
 def clean(raw_text):
 	return [s.lower() for s in re.split(" |\"|\,|\;|\.|\'|\)|\(", raw_text) if s != ""]
 
-cleaned = clean(raw)
 
 """Determines how much we care about length of tuple vs. its frequency"""
 def weight_fn(x):
@@ -45,7 +39,6 @@ def frequent_phrases(arr, tup=6, size=100):
 			else:
 				dict[tuple] = 1
 		idx = i % tup
-		# tuple = tuples[idx]
 		tuples[idx] = ''
 	freq_map = []
 	for phrase in dict:
