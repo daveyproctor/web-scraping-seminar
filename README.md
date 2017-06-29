@@ -1,6 +1,8 @@
-# Intro to web scraping in python 3
+# Intro to web scraping in Python3
 
-## uses bs4 (beautiful soup) and requests
+## Libraries
+* uses bs4 (beautiful soup) and requests
+`sudo pip3 install -r requirements.txt`
 
 ## usage:
 `$ git clone https://github.com/daveyproctor/web-scraping-seminar`
