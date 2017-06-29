@@ -2,7 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from links import links
-links = links[-1:]
+links = links[-5:]
+
+# print(links)
 
 
 """ping url and return soup object"""
@@ -10,17 +12,21 @@ def get_soup(url):
 	data = requests.get(url).text
 	return BeautifulSoup(data, "html.parser")
 
+soup = get_soup(links[0])
 
 """return all relevant text as continuous string"""
 def text(soup):
-	# TODO
-	return
+	all_paras = soup.find_all('p')
+	return ' '.join([para.get_text() for para in all_paras])
+
+raw = text(soup)
 
 
 """convert all strings to lower and remove irrelevant chars like .;'"""
 def clean(raw_text):
 	return [s.lower() for s in re.split(" |\"|\,|\;|\.|\'|\)|\(", raw_text) if s != ""]
 
+cleaned = clean(raw)
 
 """Determines how much we care about length of tuple vs. its frequency"""
 def weight_fn(x):
@@ -49,8 +55,11 @@ def frequent_phrases(arr, tup=6, size=100):
 
 """prints an html word cloud of the most frequent phrases"""
 def cloud(freq_phrases):
-	# TODO
-	return
+	for phrase in freq_phrases:
+		try:
+			print("<div style=\"font-size: {0}px\"> {1} </div>".format(weight_fn(phrase), phrase[0]))
+		except UnicodeEncodeError:
+			pass
 
 """Does cloud generation after hitting all pages"""
 def main(links):
@@ -62,4 +71,4 @@ def main(links):
 	freq_phrases = frequent_phrases(arr)
 	cloud(freq_phrases)
 
-# main(links)
+main(links)
