@@ -8,6 +8,5 @@
 `$ git clone https://github.com/daveyproctor/web-scraping-seminar`
 
 ## What we did:
-`$ unzip web-scraping-seminar`
-* fill in the TODOs!
+* filled in the TODOs!
 * working code is already finished up above.
